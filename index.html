@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>JSON!!</title>
+  <style>
+  table.info {
+    border-collapse: collapse;
+  }
+  td {
+    border:1px solid black;
+  }
+  </style>
+</head>
+<body>
+  <table class="info">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Company</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <td>Name</td>
+        <td>Phone</td>
+        <td>Email</td>
+        <td>Company</td>
+      </tr>
+    </tfoot>
+    <tbody>
+
+    </tbody>
+
+  </table>
+  <script>
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "wow.json", true);
+    xhttp.onreadystatechange = function() {
+      if(this.readyState == 4 && this.status == 200) {
+        let storage = JSON.parse(this.response);
+        for(i in storage.data) {
+          let tr = document.createElement('tr');
+          for(let j = 0; j < 4; j++) {
+            let td = document.createElement('td');
+            td.innerHTML = storage.data[i][j];
+            tr.appendChild(td);
+          }
+          document.querySelector("table.info").appendChild(tr);
+        }
+      }
+    };
+    xhttp.send();
+  </script>
+</body>
+</html>
